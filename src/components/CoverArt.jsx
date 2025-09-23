@@ -2,7 +2,6 @@ export default function CoverArt({ song, src, alt }) {
   const image =
     song?.cover ||
     src ||
-    // fallback placeholder so UI never breaks
     "data:image/svg+xml;utf8," +
       encodeURIComponent(
         `<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'>
@@ -21,7 +20,7 @@ export default function CoverArt({ song, src, alt }) {
     <img
       src={image}
       alt={altText}
-      className="w-full max-w-72 aspect-square rounded-2xl object-cover shadow"
+      className="w-full aspect-square rounded-2xl object-cover shadow md:max-w-[45vh] md:mx-auto"
     />
   );
 }
