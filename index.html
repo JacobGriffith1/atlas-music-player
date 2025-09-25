@@ -5,6 +5,16 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Music Player | Atlas School</title>
+    <script>
+      (function () {
+        try {
+          const ls = localStorage.getItem('theme'); // 'dark' | 'light' | null
+          const sysPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const wantDark = ls ? ls === 'dark' : sysPrefersDark;
+          document.documentElement.classList.toggle('dark', wantDark);
+        } catch {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

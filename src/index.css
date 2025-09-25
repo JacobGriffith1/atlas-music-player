@@ -1,23 +1,68 @@
 @import "tailwindcss";
 
+/* Light mode — seafoam + pink */
 @theme {
   /* neutrals */
-  --color-paper: oklch(0.985 0.005 250);     /* app background */
-  --color-surface: oklch(0.97 0.01 250);     /* cards/panels */
-  --color-surface-2: oklch(0.955 0.01 250);  /* hovers/selected */
-  --color-ink: oklch(0.21 0.03 250);         /* primary text */
-  --color-muted: oklch(0.45 0.02 250);       /* secondary text */
-  --color-subtle: oklch(0.62 0.015 250);     /* tertiary text */
-  --color-divider: oklch(0.88 0.01 250);     /* borders/rings */
+  --color-paper: oklch(0.985 0.005 250);
+  --color-surface: oklch(0.97 0.01 250);
+  --color-surface-2: oklch(0.955 0.01 250);
+  --color-ink: oklch(0.21 0.03 250);
+  --color-muted: oklch(0.45 0.02 250);
+  --color-subtle: oklch(0.62 0.015 250);
+  --color-divider: oklch(0.86 0.01 250);
 
-  /* brand colors (≥3 custom colors total) */
+  /* brand */
   --color-primary: oklch(0.62 0.15 152);     /* seafoam */
   --color-primary-600: oklch(0.82 0.22 149);
   --color-primary-700: oklch(0.84 0.22 152);
 
-  --color-accent: oklch(0.60 0.24 4.90);      /* pink */
-  --color-accent-600: oklch(0.65 0.24 4.90);
+  --color-accent: oklch(0.60 0.24 4.9);    /* pink */
+  --color-accent-600: oklch(0.55 0.24 4.9);
 
-  /* optional: rounding & shadow tokens if you want */
   --radius-xl: 1.25rem;
+}
+
+/* Dark mode — charcoal + blue */
+html.dark {
+  --color-paper: oklch(0.14 0.02 255);
+  --color-surface: oklch(0.18 0.02 255);
+  --color-surface-2: oklch(0.22 0.02 255);
+  --color-ink: oklch(0.97 0.02 260);
+  --color-muted: oklch(0.82 0.02 260);
+  --color-subtle: oklch(0.72 0.02 260);
+  --color-divider: oklch(0.35 0.02 255);
+
+  --color-primary: oklch(0.40 0.06617 258.571);   /* blue-grey */
+  --color-primary-600: oklch(0.35 0.02 260);
+  --color-primary-700: oklch(0.30 0.02 260);
+
+  --color-accent: oklch(0.60 0.24 4.9);    /* pink */
+  --color-accent-600: oklch(0.55 0.24 4.9);
+}
+
+/* optional aliases for var(--surface) style usage */
+:root {
+  --paper: var(--color-paper);
+  --surface: var(--color-surface);
+  --surface-2: var(--color-surface-2);
+  --ink: var(--color-ink);
+  --muted: var(--color-muted);
+  --subtle: var(--color-subtle);
+  --divider: var(--color-divider);
+  --primary: var(--color-primary);
+  --primary-600: var(--color-primary-600);
+  --primary-700: var(--color-primary-700);
+  --accent: var(--color-accent);
+  --accent-600: var(--color-accent-600);
+}
+
+/* page bg/text */
+@layer base {
+  html, body {
+    @apply min-h-screen;
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  html { color-scheme: light; }
+  html.dark { color-scheme: dark; }
 }
