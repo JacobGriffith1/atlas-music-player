@@ -33,16 +33,17 @@ export default function MusicPlayer() {
 
   return (
     <div className="w-full">
-      <div className="mx-auto max-w-6xl rounded-2xl bg-white shadow-lg ring-1 ring-slate-100">
-        <div className="flex w-full flex-col gap-y-8 px-5 py-8 md:flex-row md:gap-x-[10%] md:px-[5%]">
+      <div className="mx-auto max-w-5xl rounded-[var(--radius-xl)] bg-primary-700 p-6 shadow-xl text-ink">
+        <div className="flex w-full flex-col gap-y-8 md:flex-row md:gap-x-[10%] md:px-[5%]">
           <section className="md:w-[40%]">
             <CurrentlyPlaying song={currentSong} />
           </section>
 
-          <div className="md:hidden h-px bg-slate-200 my-2" />
+          {/* divider: horizontal on small, vertical on md+ */}
+          <div className="my-4 h-px w-full bg-primary md:my-0 md:mx-6 md:h-auto md:w-px" />
 
-          <aside className="md:w-[40%] md:border-l md:border-slate-200 md:pl-6">
-            <h2 className="mb-3 text-2xl font-semibold tracking-wider text-neutral-900">
+          <aside className="md:w-[40%]">
+            <h2 className="mb-3 text-base font-semibold uppercase tracking-wider text-muted">
               Playlist
             </h2>
             <Playlist songs={songs} />

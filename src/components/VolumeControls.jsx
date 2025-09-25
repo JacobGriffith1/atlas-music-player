@@ -16,12 +16,12 @@ export default function VolumeControls({ defaultValue = 60, onChange }) {
 
   return (
     <div className="flex items-center gap-4">
-      <Volume2 className="h-6 w-6 text-black" aria-hidden="true" />
+      <Volume2 className="h-6 w-6 text-accent" aria-hidden="true" />
 
       <div className="relative w-full">
-        <div className="absolute inset-y-0 left-0 right-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-gray-100 border border-gray-300" />
-        <div className={`absolute left-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-[#4b5a77] ${filled}`}>
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-[#4b5a77] border-2 border-white shadow" />
+        <div className="absolute inset-y-0 left-0 right-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-paper opacity-90 border-accent border-2" />
+        <div className={`absolute left-0 top-1/2 -translate-y-1/2 h-2 rounded-full bg-accent-600 ${filled}`}>
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 h-5 w-5 rounded-full bg-accent-600 border-2 border-accent shadow" />
         </div>
         <input
           type="range"

@@ -22,10 +22,10 @@ export default function PlayListItem({
   return (
     <div className={`flex items-start justify-between gap-4 rounded-xl px-1 py-2 ${state}`}>
       <div className="min-w-0">
-        <p className="truncate text-lg font-bold leading-tight text-slate-900">{t}</p>
-        <p className="truncate -mt-0.5 text-l font-medium text-slate-500">{a}</p>
+        <p className="truncate text-lg font-bold leading-tight text-ink">{t}</p>
+        <p className="truncate -mt-0.5 text-sm font-medium text-muted">{a}</p>
       </div>
-      <span className="ml-4 shrink-0 self-center tabular-nums text-l font-bold text-slate-400">
+      <span className="ml-4 shrink-0 self-center tabular-nums text-sm font-bold text-subtle">
         {formatted}
       </span>
     </div>

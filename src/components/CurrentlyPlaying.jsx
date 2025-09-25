@@ -15,7 +15,7 @@ export default function CurrentlyPlaying({ song }) {
     };
 
   return (
-    <section className="flex flex-col gap-4 md:gap-5 md:sticky md:top-8">
+    <section className="flex flex-col gap-4 md:gap-5 md:sticky md:top-8 text-[oklch(var(--ink))]">
       <CoverArt song={current} />
       <SongTitle song={current} />
       <PlayControls />
