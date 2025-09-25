@@ -4,10 +4,10 @@ export default function SongTitle({ song, title, artist, as = "h2" }) {
   const Tag = as || "h2";
   return (
     <div className="space-y-2">
-      <Tag className="text-4xl font-black tracking-tight leading-tight text-[oklch(var(--ink))]">
+      <Tag className="text-4xl text-paper text-shadow-[1px_1px_0_#fb2b7c,-1px_-1px_0_#fb2b7c,1px_-1px_0_#fb2b7c,-1px_1px_0_#fb2b7c] font-black tracking-tight leading-tight text-[oklch(var(--ink))]">
         {t}
       </Tag>
-      <p className="text-xl font-medium text-[oklch(var(--muted))]">
+      <p className="text-xl font-medium text-accent-600 ]">
         {a}
       </p>
     </div>

@@ -17,15 +17,15 @@ export default function PlayListItem({
       ? `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`
       : length ?? "";
 
-  const state = selected ? "bg-slate-50 ring-1 ring-slate-200" : "hover:bg-slate-50";
+  const state = selected ? "bg-accent-600 ring-1 ring-accent" : "hover:bg-accent-600 hover:opacity-90";
 
   return (
-    <div className={`flex items-start justify-between gap-4 rounded-xl px-1 py-2 ${state}`}>
+    <div className={`flex items-start justify-between gap-4 rounded-xl px-1 py-2 text-shadow-[1px_1px_0_#fb2b7c,-1px_-1px_0_#fb2b7c,1px_-1px_0_#fb2b7c,-1px_1px_0_#fb2b7c] ${state}`}>
       <div className="min-w-0">
-        <p className="truncate text-lg font-bold leading-tight text-ink">{t}</p>
-        <p className="truncate -mt-0.5 text-sm font-medium text-muted">{a}</p>
+        <p className="truncate text-lg font-bold leading-tight text-paper">{t}</p>
+        <p className="truncate -mt-0.5 text-sm font-medium text-paper">{a}</p>
       </div>
-      <span className="ml-4 shrink-0 self-center tabular-nums text-sm font-bold text-subtle">
+      <span className="ml-4 shrink-0 self-center tabular-nums text-sm font-bold text-paper">
         {formatted}
       </span>
     </div>
