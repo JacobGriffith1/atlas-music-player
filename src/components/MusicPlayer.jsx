@@ -1,5 +1,6 @@
 import CurrentlyPlaying from "./CurrentlyPlaying";
 import Playlist from "./Playlist";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 export default function MusicPlayer() {
   const currentSong = {
@@ -31,7 +32,11 @@ export default function MusicPlayer() {
     },
   ];
 
-  return (
+  const isLoading = false; /* manually change to enable loading skeleton */
+
+  return isLoading ? (
+    <LoadingSkeleton />
+  ) : (
     <div className="w-full">
       <div className="mx-auto max-w-5xl rounded-[var(--radius-xl)] bg-[var(--primary-700)] p-6 shadow-xl">
         <div className="flex w-full flex-col gap-y-8 md:flex-row md:gap-x-[10%] md:px-[5%]">

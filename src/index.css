@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-/* Light mode — seafoam + pink */
 @theme {
-  /* neutrals */
   --color-paper: oklch(0.985 0.005 250);
   --color-surface: oklch(0.97 0.01 250);
   --color-surface-2: oklch(0.955 0.01 250);
@@ -11,7 +9,6 @@
   --color-subtle: oklch(0.62 0.015 250);
   --color-divider: oklch(0.86 0.01 250);
 
-  /* brand */
   --color-primary: oklch(0.62 0.15 152);     /* seafoam */
   --color-primary-600: oklch(0.82 0.22 149);
   --color-primary-700: oklch(0.84 0.22 152);
@@ -22,7 +19,6 @@
   --radius-xl: 1.25rem;
 }
 
-/* Dark mode — charcoal + blue */
 html.dark {
   --color-paper: oklch(0.14 0.02 255);
   --color-surface: oklch(0.18 0.02 255);
@@ -40,7 +36,6 @@ html.dark {
   --color-accent-600: oklch(0.55 0.24 4.9);
 }
 
-/* optional aliases for var(--surface) style usage */
 :root {
   --paper: var(--color-paper);
   --surface: var(--color-surface);
@@ -56,7 +51,6 @@ html.dark {
   --accent-600: var(--color-accent-600);
 }
 
-/* page bg/text */
 @layer base {
   html, body {
     @apply min-h-screen;
