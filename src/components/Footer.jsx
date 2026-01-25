@@ -1,4 +1,3 @@
-// src/components/Footer.jsx
 import { useEffect, useMemo, useState } from "react";
 
 const mediaQuery = "(prefers-color-scheme: dark)";
@@ -76,7 +75,6 @@ export default function Footer() {
           <option value="dark">Dark</option>
         </select>
 
-        <span className="text-xs opacity-70">{isDark ? "Dark" : "Light"}</span>
       </div>
     </div>
   );
