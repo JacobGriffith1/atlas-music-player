@@ -1,34 +1,58 @@
+// src/components/Footer.jsx
 import { useEffect, useState } from "react";
+
+const systemDark = () =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+const readInitialIsDark = () => document.documentElement.classList.contains("dark");
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const [isDark, setIsDark] = useState(() =>
-    typeof document !== "undefined" ? document.documentElement.classList.contains("dark") : false
-  );
+  const [isDark, setIsDark] = useState(readInitialIsDark);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
-    localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const onChange = (e) => {
+      if (!localStorage.getItem("theme")) setIsDark(e.matches);
+    };
+    media.addEventListener("change", onChange);
+    return () => media.removeEventListener("change", onChange);
+  }, []);
+
+  const toggleTheme = () => {
+    const next = !isDark;
+    setIsDark(next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+  };
+
+  const resetToSystem = () => {
+    localStorage.removeItem("theme");
+    setIsDark(systemDark());
+  };
 
   return (
     <div className="flex items-center justify-between gap-4 p-8 text-[var(--color-muted)]">
       <div>&copy; {year} Atlas School</div>
-      <button
-        type="button"
-        onClick={() => setIsDark((v) => !v)}
-        className="inline-flex items-center gap-2 rounded-xl border px-3 py-2 text-sm
-                   border-[var(--color-divider)]
-                   bg-[var(--color-surface)]
-                   hover:bg-[var(--color-surface-2)]
-                   text-[var(--color-ink)]
-                   transition"
-        aria-pressed={isDark}
-        aria-label="Toggle dark mode"
-        title="Toggle dark mode"
-      >
-        {isDark ? "Switch to Light" : "Switch to Dark"}
-      </button>
+
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="inline-flex items-center rounded-xl border px-3 py-2 text-sm
+                     border-[var(--color-divider)]
+                     bg-[var(--color-surface)]
+                     hover:bg-[var(--color-surface-2)]
+                     text-[var(--color-ink)]
+                     transition"
+          aria-pressed={isDark}
+        >
+          {isDark ? "Dark" : "Light"}
+        </button>
+      </div>
     </div>
   );
 }
