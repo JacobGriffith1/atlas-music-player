@@ -1,57 +1,82 @@
 // src/components/Footer.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
-const systemDark = () =>
-  window.matchMedia("(prefers-color-scheme: dark)").matches;
+const mediaQuery = "(prefers-color-scheme: dark)";
+const getSystemDark = () => window.matchMedia(mediaQuery).matches;
 
-const readInitialIsDark = () => document.documentElement.classList.contains("dark");
+function applyDarkClass(isDark) {
+  document.documentElement.classList.toggle("dark", isDark);
+}
+
+function readStoredMode() {
+  const v = localStorage.getItem("theme"); // 'dark' | 'light' | null
+  if (v === "dark" || v === "light") return v;
+  return "system";
+}
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-  const [isDark, setIsDark] = useState(readInitialIsDark);
+  const year = useMemo(() => new Date().getFullYear(), []);
+  const [mode, setMode] = useState(() => readStoredMode());
+  const [isDark, setIsDark] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
 
+  // Apply whenever mode changes
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", isDark);
-  }, [isDark]);
+    if (mode === "dark") {
+      applyDarkClass(true);
+      setIsDark(true);
+      localStorage.setItem("theme", "dark");
+      return;
+    }
 
+    if (mode === "light") {
+      applyDarkClass(false);
+      setIsDark(false);
+      localStorage.setItem("theme", "light");
+      return;
+    }
+
+    // system
+    localStorage.removeItem("theme");
+    const sys = getSystemDark();
+    applyDarkClass(sys);
+    setIsDark(sys);
+  }, [mode]);
+
+  // Follow OS changes only in system mode
   useEffect(() => {
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    const media = window.matchMedia(mediaQuery);
     const onChange = (e) => {
-      if (!localStorage.getItem("theme")) setIsDark(e.matches);
+      if (readStoredMode() === "system") {
+        applyDarkClass(e.matches);
+        setIsDark(e.matches);
+      }
     };
     media.addEventListener("change", onChange);
     return () => media.removeEventListener("change", onChange);
   }, []);
-
-  const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-  };
-
-  const resetToSystem = () => {
-    localStorage.removeItem("theme");
-    setIsDark(systemDark());
-  };
 
   return (
     <div className="flex items-center justify-between gap-4 p-8 text-[var(--color-muted)]">
       <div>&copy; {year} Atlas School</div>
 
       <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="inline-flex items-center rounded-xl border px-3 py-2 text-sm
+        <select
+          value={mode}
+          onChange={(e) => setMode(e.target.value)}
+          className="rounded-xl border px-3 py-2 text-sm
                      border-[var(--color-divider)]
                      bg-[var(--color-surface)]
-                     hover:bg-[var(--color-surface-2)]
-                     text-[var(--color-ink)]
-                     transition"
-          aria-pressed={isDark}
+                     text-[var(--color-ink)]"
+          aria-label="Theme"
         >
-          {isDark ? "Dark" : "Light"}
-        </button>
+          <option value="system">System</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+
+        <span className="text-xs opacity-70">{isDark ? "Dark" : "Light"}</span>
       </div>
     </div>
   );
