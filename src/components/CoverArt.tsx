@@ -1,6 +1,17 @@
-export default function CoverArt({ song, src, alt }) {
-  const image = song?.cover || src;
-  const altText = alt || (song?.title ? `${song.title} cover` : "Album cover");
+type SongArt = {
+  title: string;
+  cover?: string | null;
+};
+
+type Props = {
+  song?: SongArt | null;
+  src?: string;
+  alt?: string;
+};
+
+export default function CoverArt({ song, src, alt }: Props) {
+  const image = song?.cover ?? src;
+  const altText = alt ?? (song?.title ? `${song.title} cover` : "Album cover");
 
   // Themed placeholder when no image is available
   if (!image) {

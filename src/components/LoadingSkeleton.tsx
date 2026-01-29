@@ -1,6 +1,11 @@
+type RowProps = {
+  wide?: string;
+  narrow?: string;
+};
+
 export default function LoadingSkeleton() {
   // one playlist row placeholder
-  const Row = ({ wide = "w-2/3", narrow = "w-1/3" }) => (
+  const Row = ({ wide = "w-2/3", narrow = "w-1/3" }: RowProps) => (
     <div className="flex items-start justify-between gap-4">
       <div className="min-w-0 flex-1 space-y-2">
         <div className={`h-4 rounded-md bg-[var(--color-surface-2)] ${wide}`} />
