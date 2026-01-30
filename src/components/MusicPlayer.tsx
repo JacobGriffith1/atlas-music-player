@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import CurrentlyPlaying from "./CurrentlyPlaying";
 import Playlist from "./Playlist";
 import LoadingSkeleton from "./LoadingSkeleton";
+import AudioPlayer from "./AudioPlayer";
 import type { PlaybackRate } from "./PlayControls";
 
 type PlaylistSong = {
@@ -161,6 +162,13 @@ export default function MusicPlayer() {
 
   return (
     <div className="w-full">
+      <AudioPlayer 
+        src={currentDetail.song}
+        isPlaying={isPlaying}
+        volume={volume}
+        playbackRate={playbackRate}
+        onEnded={onNext}
+      />
       <div className="mx-auto max-w-5xl rounded-[var(--radius-xl)] bg-[var(--primary-700)] p-6 shadow-xl">
         <div className="flex w-full flex-col gap-y-8 md:flex-row md:gap-x-[10%] md:px-[5%]">
           <section className="md:w-[40%]">
